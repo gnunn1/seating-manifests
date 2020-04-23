@@ -6,8 +6,14 @@
 
 This will create a ```seating``` project, wait for the operator to be ready.
 
-2. Install the application
+2. Install the kafka cluster
 
-```oc apply -k cluster/overlays/app/default```
+```oc apply -k app/kafka/overlays/default```
 
-Wait for everything to be ready
+Wait for all of the zookeeper and broker instances to be ready
+
+2. Install the applications:
+
+```oc apply -k cluster/overlays/app/ocplab```
+
+In a smallish cluster wait for all the builds to be completed and deployed

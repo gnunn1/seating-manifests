@@ -2,8 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    app.openshift.io/vcs-ref: master
-    app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
+    app.openshift.io/connects-to: seat-reader
   labels:
     app: seats
     app.kubernetes.io/component: frontend

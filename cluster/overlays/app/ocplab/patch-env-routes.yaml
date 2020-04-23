@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-        - name: server
+        - name: seat-ui
           env:
           - name: ROUTE_HOSTNAME
             value: http://seat-reader-seating.apps.cluster.ocplab.com
