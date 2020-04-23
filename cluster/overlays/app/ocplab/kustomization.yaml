@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: seating
 
 bases:
-- ../default
+- ../../../../app/seats/overlays/default
 
 patchesStrategicMerge:
 - patch-env-routes.yaml
