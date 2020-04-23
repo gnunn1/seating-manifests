@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: seatsdb
+  labels:
+    app: server
+    app.kubernetes.io/name: seatsdb
+    app.kubernetes.io/component: database
+    app.kubernetes.io/instance: seatsdb
+    app.kubernetes.io/part-of: seats
+spec:
+  ports:
+  - name: tcp
+    port: 3306
+  selector:
+    name: seatsdb

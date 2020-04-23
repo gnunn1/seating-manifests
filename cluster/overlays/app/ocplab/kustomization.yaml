@@ -4,5 +4,7 @@ kind: Kustomization
 namespace: seating
 
 bases:
-- ../../../../app/kafka/base
-- ../../../../app/seats/base
+- ../default
+
+patchesStrategicMerge:
+- patch-env-routes.yaml

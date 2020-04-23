@@ -1,0 +1,51 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
+  labels:
+    app: seats
+    app.kubernetes.io/component: service
+    app.kubernetes.io/instance: seat-listener
+    app.kubernetes.io/name: seat-listener
+    app.kubernetes.io/part-of: seats
+    app.openshift.io/runtime: camel
+    app.openshift.io/runtime-version: "8"
+  name: seat-listener
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: seat-listener:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    contextDir: /seat-listener
+    git:
+      ref: master
+      uri: https://github.com/gnunn1/seating
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: java:8
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - generic:
+      secretReference:
+        name: seat-listener-generic-webhook-secret
+    type: Generic
+  - github:
+      secretReference:
+        name: seat-listener-github-webhook-secret
+    type: GitHub
+  - imageChange:
+    type: ImageChange
+  - type: ConfigChange

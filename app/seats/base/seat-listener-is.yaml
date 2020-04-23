@@ -1,0 +1,15 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app: seats
+    app.kubernetes.io/component: service
+    app.kubernetes.io/instance: seat-listener
+    app.kubernetes.io/name: seat-listener
+    app.kubernetes.io/part-of: seats
+    app.openshift.io/runtime: camel
+    app.openshift.io/runtime-version: "8"
+  name: seat-listener
+spec:
+  lookupPolicy:
+    local: false
