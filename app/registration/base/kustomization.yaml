@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    app.kubernetes.io/part-of: registration
+
+configMapGenerator:
+- name: registerdb-init
+  files:
+    - configs/90-init-database.sh
+    - configs/schema.sql
+
+resources:
+  - db-pvc.yaml
+  - db-secret.yaml
+  - db-service.yaml
+  - db-deployment.yaml
+  - registration-ui-is.yaml
+  - registration-ui-bc.yaml
+  - registration-ui-svc.yaml
+  - registration-ui-route.yaml
+  - registration-ui-deploy.yaml

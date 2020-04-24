@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: registerdb
+  labels:
+    app: register
+    app.kubernetes.io/name: registerdb
+    app.kubernetes.io/component: database
+    app.kubernetes.io/instance: registerdb
+    app.kubernetes.io/part-of: register
+spec:
+  ports:
+  - name: tcp
+    port: 3306
+  selector:
+    name: registerdb
