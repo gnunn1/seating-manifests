@@ -15,9 +15,13 @@ have to their back-end services.
 
 This will create a ```seating``` project, wait for the operator to be ready.
 
-2. Install the kafka cluster
+2. Install the kafka cluster, you can either install a full 3 replica cluster using:
 
 ```oc apply -k app/kafka/overlays/default```
+
+Or a minimal 1 replica instance using:
+
+```oc apply -k app/kafka/overlays/minimal```
 
 Wait for all of the zookeeper and broker instances to be ready
 
@@ -32,6 +36,6 @@ you can deploy everything in parallel.
 
 ```oc apply -k cluster/overlays/ocplab/app/registration```
 
-<!-- 5. Install the analytics application:
+5. Optionally install the analytics application (not currently tested):
 
-```oc apply -k cluster/overlays/ocplab/app/analytics``` -->
+```oc apply -k cluster/overlays/ocplab/app/analytics```
