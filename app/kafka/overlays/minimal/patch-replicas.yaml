@@ -1,0 +1,7 @@
+- op: replace
+  path: /spec/kafka/replicas
+  value: 1
+
+- op: replace
+  path: /spec/zookeeper/replicas
+  value: 1
