@@ -6,7 +6,7 @@ metadata:
     app.openshift.io/vcs-ref: master
     app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
     image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"seat-listener:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"seat-listener\")].image"}]'
-    app.openshift.io/connects-to: database
+    app.openshift.io/connects-to: seatsdb
   labels:
     app: seats
     app.kubernetes.io/component: service
@@ -39,6 +39,24 @@ spec:
       - image: image-registry.openshift-image-registry.svc:5000/seating/seat-listener
         imagePullPolicy: Always
         name: seat-listener
+        env:
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: seatsdb
+                key: database-user
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: seatsdb
+                key: database-password
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: seatsdb
+                key: database-name
+          - name: MYSQL_SERVICE
+            value: seatsdb
         ports:
         - containerPort: 8080
           protocol: TCP

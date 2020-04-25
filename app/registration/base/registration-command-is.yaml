@@ -1,0 +1,17 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/seating
+  labels:
+    app: register
+    app.kubernetes.io/component: service
+    app.kubernetes.io/instance: registration-command
+    app.kubernetes.io/name: registration-command
+    app.kubernetes.io/part-of: register
+    app.openshift.io/runtime: camel
+  name: registration-command
+spec:
+  lookupPolicy:
+    local: false

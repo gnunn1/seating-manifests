@@ -22,3 +22,13 @@ resources:
   - registration-ui-svc.yaml
   - registration-ui-route.yaml
   - registration-ui-deploy.yaml
+  - registration-live-ui-is.yaml
+  - registration-live-ui-bc.yaml
+  - registration-live-ui-svc.yaml
+  - registration-live-ui-route.yaml
+  - registration-live-ui-deploy.yaml
+  - registration-command-is.yaml
+  - registration-command-bc.yaml
+  - registration-command-svc.yaml
+  - registration-command-route.yaml
+  - registration-command-deploy.yaml

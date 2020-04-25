@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: seats
     app.kubernetes.io/component: database
     app.kubernetes.io/part-of: seats
-    app.kubernetes.io/instance: database
+    app.kubernetes.io/instance: seatsdb
     app.openshift.io/runtime: mariadb
 spec:
   replicas: 1

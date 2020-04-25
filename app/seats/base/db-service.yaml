@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: seatsdb
   labels:
-    app: server
+    app: seats
     app.kubernetes.io/name: seatsdb
     app.kubernetes.io/component: database
     app.kubernetes.io/instance: seatsdb

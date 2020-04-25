@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: register
+    app.kubernetes.io/component: service
+    app.kubernetes.io/instance: registration-command
+    app.kubernetes.io/name: registration-command
+    app.kubernetes.io/part-of: register
+    app.openshift.io/runtime: camel
+  name: registration-command
+spec:
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: 8443-tcp
+    port: 8443
+    protocol: TCP
+    targetPort: 8443
+  - name: 8778-tcp
+    port: 8778
+    protocol: TCP
+    targetPort: 8778
+  selector:
+    app: registration-command
+    deploymentconfig: registration-command
+  sessionAffinity: None
