@@ -26,6 +26,10 @@ resources:
   - seat-listener-bc.yaml
   - seat-listener-svc.yaml
   - seat-listener-deploy.yaml
+  - seat-request-is.yaml
+  - seat-request-bc.yaml
+  - seat-request-svc.yaml
+  - seat-request-deploy.yaml
   - seat-ui-is.yaml
   - seat-ui-bc.yaml
   - seat-ui-svc.yaml

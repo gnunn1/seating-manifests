@@ -6,6 +6,7 @@ metadata:
     app.openshift.io/vcs-ref: master
     app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
     image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"registration-live-ui:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"registration-live-ui\")].image"}]'
+    app.openshift.io/connects-to: registration-command
   labels:
     app: register
     app.kubernetes.io/component: frontend
@@ -35,6 +36,9 @@ spec:
         deploymentconfig: registration-live-ui
     spec:
       containers:
+      - env:
+        - name: ROUTE_HOSTNAME
+          value: registration-command-seating.apps.cluster.example.com
       - image: image-registry.openshift-image-registry.svc:5000/seating/registration-live-ui
         imagePullPolicy: Always
         name: registration-live-ui
