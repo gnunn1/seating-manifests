@@ -1,0 +1,50 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
+  labels:
+    app: dashboard
+    app.kubernetes.io/component: dashboard
+    app.kubernetes.io/instance: dashboard
+    app.kubernetes.io/name: dashboard
+    app.openshift.io/runtime: nginx
+    app.openshift.io/runtime-version: "1.14"
+  name: dashboard
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: dashboard:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    contextDir: /dashboard
+    git:
+      ref: master
+      uri: https://github.com/gnunn1/seating
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: nginx:1.14
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - generic:
+      secretReference:
+        name: dashboard-generic-webhook-secret
+    type: Generic
+  - github:
+      secretReference:
+        name: dashboard-github-webhook-secret
+    type: GitHub
+  - imageChange:
+    type: ImageChange
+  - type: ConfigChange
