@@ -1,0 +1,17 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
+  labels:
+    app: seats
+    app.kubernetes.io/component: service
+    app.kubernetes.io/instance: seat-request
+    app.kubernetes.io/name: seat-request
+    app.kubernetes.io/part-of: seats
+    app.openshift.io/runtime: camel
+  name: seat-request
+spec:
+  lookupPolicy:
+    local: false
