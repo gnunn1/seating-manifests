@@ -39,7 +39,7 @@ spec:
       - name: registration-live-ui
         env:
         - name: ROUTE_HOSTNAME
-          value: registration-command-seating.apps.cluster.example.com
+          value: http://registration-command-seating.apps.cluster.example.com
         image: image-registry.openshift-image-registry.svc:5000/seating/registration-live-ui
         imagePullPolicy: Always
         ports:

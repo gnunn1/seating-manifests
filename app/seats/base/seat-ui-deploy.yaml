@@ -38,7 +38,7 @@ spec:
       containers:
       - env:
         - name: ROUTE_HOSTNAME
-          value: seat-reader-seating.apps.cluster.example.com
+          value: http://seat-reader-seating.apps.cluster.example.com
         image: image-registry.openshift-image-registry.svc:5000/seating/seat-ui
         imagePullPolicy: Always
         name: seat-ui

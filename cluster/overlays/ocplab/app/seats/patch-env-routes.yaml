@@ -10,4 +10,4 @@ spec:
         - name: seat-ui
           env:
           - name: ROUTE_HOSTNAME
-            value: seat-reader-seating.apps.cluster.ocplab.com
+            value: http://seat-reader-seating.apps.cluster.ocplab.com

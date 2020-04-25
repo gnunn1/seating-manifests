@@ -9,4 +9,4 @@ spec:
         - name: registration-live-ui
           env:
           - name: ROUTE_HOSTNAME
-            value: registration-command-seating.apps.cluster.ocplab.com
+            value: http://registration-command-seating.apps.cluster.ocplab.com
