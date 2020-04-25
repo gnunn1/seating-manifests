@@ -36,12 +36,12 @@ spec:
         deploymentconfig: registration-live-ui
     spec:
       containers:
-      - env:
+      - name: registration-live-ui
+        env:
         - name: ROUTE_HOSTNAME
           value: registration-command-seating.apps.cluster.example.com
-      - image: image-registry.openshift-image-registry.svc:5000/seating/registration-live-ui
+        image: image-registry.openshift-image-registry.svc:5000/seating/registration-live-ui
         imagePullPolicy: Always
-        name: registration-live-ui
         ports:
         - containerPort: 8080
           protocol: TCP
