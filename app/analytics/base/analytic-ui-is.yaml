@@ -1,0 +1,21 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2020-04-25T17:00:18Z"
+  generation: 1
+  labels:
+    app: analytics
+    app.kubernetes.io/component: analytic-ui
+    app.kubernetes.io/instance: analytic-ui
+    app.kubernetes.io/name: analytic-ui
+    app.kubernetes.io/part-of: analytics
+    app.openshift.io/runtime: nodejs
+    app.openshift.io/runtime-version: "10"
+  name: analytic-ui
+spec:
+  lookupPolicy:
+    local: false

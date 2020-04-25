@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.openshift.io/connects-to: analytic-listener
+  labels:
+    app: analytics
+    app.kubernetes.io/component: analytic-ui
+    app.kubernetes.io/instance: analytic-ui
+    app.kubernetes.io/name: analytic-ui
+    app.kubernetes.io/part-of: analytics
+    app.openshift.io/runtime: nodejs
+    app.openshift.io/runtime-version: "10"
+  name: analytic-ui
+spec:
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: analytic-ui
+    deploymentconfig: analytic-ui
+  sessionAffinity: None
+  type: ClusterIP

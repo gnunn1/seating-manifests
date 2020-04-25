@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: analytics
+    app.kubernetes.io/component: analytic-listener
+    app.kubernetes.io/instance: analytic-listener
+    app.kubernetes.io/name: analytic-listener
+    app.kubernetes.io/part-of: analytics
+    app.openshift.io/runtime: camel
+  name: analytic-listener
+spec:
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: analytic-listener
+    weight: 100
+  wildcardPolicy: None

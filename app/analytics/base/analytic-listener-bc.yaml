@@ -1,0 +1,50 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
+  labels:
+    app: analytics
+    app.kubernetes.io/component: analytic-listener
+    app.kubernetes.io/instance: analytic-listener
+    app.kubernetes.io/name: analytic-listener
+    app.kubernetes.io/part-of: analytics
+    app.openshift.io/runtime: camel
+  name: analytic-listener
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: analytic-listener:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    contextDir: /analytic-listener
+    git:
+      ref: master
+      uri: https://github.com/gnunn1/seating
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: java:8
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - generic:
+      secretReference:
+        name: analytic-listener-generic-webhook-secret
+    type: Generic
+  - github:
+      secretReference:
+        name: analytic-listener-github-webhook-secret
+    type: GitHub
+  - imageChange:
+    type: ImageChange
+  - type: ConfigChange

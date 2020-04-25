@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    alpha.image.policy.openshift.io/resolve-names: '*'
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
+    deployment.kubernetes.io/revision: "2"
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"analytic-listener:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"analytic-listener\")].image"}]'
+  labels:
+    app: analytics
+    app.kubernetes.io/component: analytic-listener
+    app.kubernetes.io/instance: analytic-listener
+    app.kubernetes.io/name: analytic-listener
+    app.kubernetes.io/part-of: analytics
+    app.openshift.io/runtime: camel
+  name: analytic-listener
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: analytic-listener
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: analytic-listener
+        deploymentconfig: analytic-listener
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/seating/analytic-listener
+        imagePullPolicy: Always
+        name: analytic-listener
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        - containerPort: 8778
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
