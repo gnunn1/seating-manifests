@@ -36,6 +36,10 @@ you can deploy everything in parallel.
 
 ```oc apply -k cluster/overlays/ocplab/app/registration```
 
-5. Optionally install the analytics application (not currently tested):
+5. Optionally install the analytics application (note this is currently tested, may not work):
 
 ```oc apply -k cluster/overlays/ocplab/app/analytics```
+
+6. Optionally install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be view in one window.
+
+```oc apply -k app/dashboard/overlays/default```
