@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registration-live-ui
+spec:
+  template:
+    spec:
+      containers:
+        - name: registration-live-ui
+          env:
+          - name: ROUTE_HOSTNAME
+            value: registration-command-seating.apps.cluster.ocplab.com
