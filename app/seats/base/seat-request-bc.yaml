@@ -34,7 +34,7 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: java:8
+        name: fuse7-java-openshift:1.6
         namespace: openshift
     type: Source
   successfulBuildsHistoryLimit: 5

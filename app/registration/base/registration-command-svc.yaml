@@ -23,6 +23,14 @@ spec:
     port: 8778
     protocol: TCP
     targetPort: 8778
+  - name: jolokia
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
+  - name: prometheus
+    port: 9779
+    protocol: TCP
+    targetPort: 9779
   selector:
     app: registration-command
     deploymentconfig: registration-command
