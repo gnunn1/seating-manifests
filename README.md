@@ -1,3 +1,7 @@
+## Credits
+
+Based on a demo from Christina Lin (https://github.com/weimeilin79/sko2018)
+
 ## Install demo in your OpenShift cluster
 
 This demo uses kustomize to manage cluster specific settings. Kustomize is a patching framework that is included with kubectl/oc so there
