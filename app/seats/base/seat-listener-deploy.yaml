@@ -15,6 +15,7 @@ metadata:
     app.kubernetes.io/part-of: seats
     app.openshift.io/runtime: camel
     app.openshift.io/runtime-version: "8"
+    fuse-prometheus: "true"
   name: seat-listener
 spec:
   progressDeadlineSeconds: 600
@@ -34,6 +35,7 @@ spec:
       labels:
         app: seat-listener
         deploymentconfig: seat-listener
+        fuse-prometheus: "true"
     spec:
       containers:
       - image: image-registry.openshift-image-registry.svc:5000/seating/seat-listener

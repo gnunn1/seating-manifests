@@ -11,6 +11,7 @@ metadata:
     app.kubernetes.io/part-of: seats
     app.openshift.io/runtime: camel
     app.openshift.io/runtime-version: "8"
+    fuse-prometheus: "true"
   name: seat-listener
 spec:
   ports:

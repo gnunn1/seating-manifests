@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/name: seat-request
     app.kubernetes.io/part-of: seats
     app.openshift.io/runtime: camel
+    fuse-prometheus: "true"
   name: seat-request
 spec:
   ports:

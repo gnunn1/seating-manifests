@@ -14,6 +14,7 @@ metadata:
     app.kubernetes.io/name: seat-reader
     app.kubernetes.io/part-of: seats
     app.openshift.io/runtime: camel
+    fuse-prometheus: "true"
   name: seat-reader
 spec:
   progressDeadlineSeconds: 600
@@ -33,6 +34,7 @@ spec:
       labels:
         app: seat-reader
         deploymentconfig: seat-reader
+        fuse-prometheus: "true"
     spec:
       containers:
       - image: image-registry.openshift-image-registry.svc:5000/seating/seat-reader

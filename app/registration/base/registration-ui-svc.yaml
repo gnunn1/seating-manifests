@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/name: registration-ui
     app.kubernetes.io/part-of: register
     app.openshift.io/runtime: camel
+    fuse-prometheus: "true"
   name: registration-ui
 spec:
   ports:

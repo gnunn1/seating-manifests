@@ -13,6 +13,7 @@ metadata:
     app.kubernetes.io/name: registration-ui
     app.kubernetes.io/part-of: register
     app.openshift.io/runtime: camel
+    fuse-prometheus: "true"
   name: registration-ui
 spec:
   progressDeadlineSeconds: 600
@@ -32,6 +33,7 @@ spec:
       labels:
         app: registration-ui
         deploymentconfig: registration-ui
+        fuse-prometheus: "true"
     spec:
       containers:
       - image: image-registry.openshift-image-registry.svc:5000/seating/registration-ui
