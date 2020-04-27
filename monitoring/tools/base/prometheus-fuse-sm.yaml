@@ -1,0 +1,10 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fuse
+spec:
+  selector:
+    matchLabels:
+      fuse-prometheus: "true"
+  endpoints:
+  - port: prometheus

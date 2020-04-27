@@ -1,0 +1,13 @@
+# oc policy add-role-to-user view system:serviceaccount:seating-monitoring:prometheus-k8s -n seating
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prometheus-seating-view
+  namespace: seating
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+subjects:
+- kind: ServiceAccount
+  name: prometheus-k8s
