@@ -19,3 +19,4 @@ resources:
 - grafana-kafka-dashboard.yaml
 - grafana-kafka-exporter-dashboard.yaml
 - grafana-zookeeper-dashboard.yaml
+- grafana-fuse-dashboard.yaml
