@@ -32,3 +32,7 @@ resources:
   - registration-command-svc.yaml
   - registration-command-route.yaml
   - registration-command-deploy.yaml
+  - registration-simulator-is.yaml
+  - registration-simulator-bc.yaml
+  - registration-simulator-svc.yaml
+  - registration-simulator-deploy.yaml

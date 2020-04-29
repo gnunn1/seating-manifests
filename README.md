@@ -15,7 +15,7 @@ have to their back-end services.
 
 1. Install AMQ Streams Operator first
 
-```oc apply -k cluster/overlays/operators/default```
+```oc apply -k app/amq-streams-operator/overlays/default```
 
 This will create a ```seating``` project, wait for the operator to be ready.
 
@@ -47,3 +47,7 @@ you can deploy everything in parallel.
 6. Optionally install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be view in one window.
 
 ```oc apply -k app/dashboard/overlays/default```
+
+7. Optionally deploy 3scale gateways. Note I use a sealed secret in my ocplab cluster, you will need to replace this your own secret in order for the gateways to connect to the 3scale admin portal. See the 3scale docs.
+
+```kustomize build cluster/overlays/ocplab/app/apicast | oc apply -f -```

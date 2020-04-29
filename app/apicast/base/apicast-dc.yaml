@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/component: 3scale-gateway
     app.kubernetes.io/instance: 3scale-gateway
     app.openshift.io/runtime: 3scale
+    app.kubernetes.io/part-of: 3scale
   name: apicast
 spec:
   replicas: 1
