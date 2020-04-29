@@ -5,7 +5,6 @@ metadata:
     alpha.image.policy.openshift.io/resolve-names: '*'
     app.openshift.io/vcs-ref: master
     app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
-    deployment.kubernetes.io/revision: "2"
     image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"analytic-listener:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"analytic-listener\")].image"}]'
   labels:
     app: analytics
