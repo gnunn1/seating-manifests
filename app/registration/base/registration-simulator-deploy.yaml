@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    alpha.image.policy.openshift.io/resolve-names: '*'
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"registration-simulator:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"registration-simulator\")].image"}]'
+  labels:
+    app: register
+    app.kubernetes.io/component: service
+    app.kubernetes.io/instance: registration-simulator
+    app.kubernetes.io/name: registration-simulator
+    app.kubernetes.io/part-of: register
+    app.openshift.io/runtime: camel
+  name: registration-simulator
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: registration-simulator
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: registration-simulator
+        deploymentconfig: registration-simulator
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/seating/registration-simulator:latest
+        imagePullPolicy: Always
+        name: registration-simulator
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        - containerPort: 8778
+          protocol: TCP
+          name: jolokia
+        - containerPort: 9779
+          protocol: TCP
+          name: prometheus
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

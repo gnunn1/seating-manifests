@@ -1,0 +1,50 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/gnunn1/seating
+  labels:
+    app: register
+    app.kubernetes.io/component: service
+    app.kubernetes.io/instance: registration-simulator
+    app.kubernetes.io/name: registration-simulator
+    app.kubernetes.io/part-of: register
+    app.openshift.io/runtime: camel
+  name: registration-simulator
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: registration-simulator:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    contextDir: /registration-simulator
+    git:
+      ref: master
+      uri: https://github.com/gnunn1/seating
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: fuse7-java-openshift:1.6
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - generic:
+      secretReference:
+        name: registration-simulator-generic-webhook-secret
+    type: Generic
+  - github:
+      secretReference:
+        name: registration-simulator-github-webhook-secret
+    type: GitHub
+  - imageChange:
+    type: ImageChange
+  - type: ConfigChange
