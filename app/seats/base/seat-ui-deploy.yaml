@@ -39,6 +39,8 @@ spec:
       - env:
         - name: ROUTE_HOSTNAME
           value: http://seat-reader-seating.apps.cluster.example.com
+        - name: API_KEY
+          value: Nothing
         image: image-registry.openshift-image-registry.svc:5000/seating/seat-ui
         imagePullPolicy: Always
         name: seat-ui
