@@ -1,0 +1,75 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Seating API",
+    "description": "This is a simple API that provides information about allocated and reserved seats.",
+    "contact": {
+      "email": "gnunn@demo.com"
+    }
+  },
+  "host": "apicast-prod-seating.apps.cluster.ocplab.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/seats/sa/integration": {
+      "get": {
+        "tags": [
+          "allocation"
+        ],
+        "description": "Retrieve seating allocation status",
+        "summary": "Seating allocation status",
+        "operationId": "seat_allocation",
+        "produces": [
+            "application/json"
+        ],
+        "parameters": [
+            {
+                "name": "user_key",
+                "in": "header",
+                "description": "Your API access key",
+                "required": true,
+                "x-data-threescale-name": "user_keys",
+                "type": "string"
+            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful"
+          }
+        }
+      }
+    },
+    "/registration/sa/status": {
+      "get": {
+        "tags": [
+          "reservation"
+        ],
+        "description": "Retrieve reservation status",
+        "summary": "Seating reserve status",
+        "description": "",
+        "operationId": "reservation-seat-data",
+        "produces": [
+            "application/json"
+        ],
+        "parameters": [
+            {
+                "name": "user_key",
+                "in": "header",
+                "description": "Your API access key",
+                "required": true,
+                "x-data-threescale-name": "user_keys",
+                "type": "string"
+            }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful"
+          }
+        }
+      }
+    }
+  }
+}
