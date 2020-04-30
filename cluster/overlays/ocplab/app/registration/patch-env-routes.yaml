@@ -10,6 +10,7 @@ spec:
           env:
           - name: ROUTE_HOSTNAME
             # Native URL is /sa/status, added /registration for 3scale API as product public path mapping
-            value: http://registration-command-seating.apps.cluster.ocplab.com/registration/sa/status
+            value: http://apicast-prod-seating.apps.cluster.ocplab.com/registration/sa/status
+            #value: http://registration-command-seating.apps.cluster.ocplab.com/sa/status
           - name: API_KEY
             value: a486f905b59a96e6c4c59d34365290c8

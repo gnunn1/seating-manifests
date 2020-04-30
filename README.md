@@ -27,7 +27,7 @@ Or a minimal 1 replica instance using:
 
 ```oc apply -k app/kafka/overlays/minimal```
 
-Wait for all of the zookeeper and broker instances to be ready
+Wait for all of the zookeeper and brokeroc delete instances to be ready
 
 3. Install the seats application:
 
