@@ -1,0 +1,50 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: https://github.com/seating
+  labels:
+    app: register
+    app.kubernetes.io/component: registration-loader
+    app.kubernetes.io/instance: registration-loader
+    app.kubernetes.io/name: registration-loader
+    app.kubernetes.io/part-of: register
+    app.openshift.io/runtime: camel
+  name: registration-loader
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: registration-loader:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    contextDir: /registration-loader
+    git:
+      ref: master
+      uri: https://github.com/gnunn1/seating
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: fuse7-java-openshift:1.6
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  # - generic:
+  #     secretReference:
+  #       name: registration-loader-generic-webhook-secret
+  #   type: Generic
+  # - github:
+  #     secretReference:
+  #       name: registration-loader-github-webhook-secret
+  #   type: GitHub
+  - imageChange:
+    type: ImageChange
+  - type: ConfigChange

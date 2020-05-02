@@ -36,3 +36,7 @@ resources:
   - registration-simulator-bc.yaml
   - registration-simulator-svc.yaml
   - registration-simulator-deploy.yaml
+  - registration-loader-is.yaml
+  - registration-loader-bc.yaml
+  - registration-loader-svc.yaml
+  - registration-loader-deploy.yaml
