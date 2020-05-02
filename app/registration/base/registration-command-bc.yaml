@@ -37,14 +37,14 @@ spec:
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
-  - generic:
-      secretReference:
-        name: registration-command-generic-webhook-secret
-    type: Generic
-  - github:
-      secretReference:
-        name: registration-command-github-webhook-secret
-    type: GitHub
+  # - generic:
+  #     secretReference:
+  #       name: registration-command-generic-webhook-secret
+  #   type: Generic
+  # - github:
+  #     secretReference:
+  #       name: registration-command-github-webhook-secret
+  #   type: GitHub
   - imageChange:
     type: ImageChange
   - type: ConfigChange

@@ -38,14 +38,14 @@ spec:
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
-  - generic:
-      secretReference:
-        name: seat-ui-generic-webhook-secret
-    type: Generic
-  - github:
-      secretReference:
-        name: seat-ui-github-webhook-secret
-    type: GitHub
+  # - generic:
+  #     secretReference:
+  #       name: seat-ui-generic-webhook-secret
+  #   type: Generic
+  # - github:
+  #     secretReference:
+  #       name: seat-ui-github-webhook-secret
+  #   type: GitHub
   - imageChange:
     type: ImageChange
   - type: ConfigChange
