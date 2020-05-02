@@ -14,7 +14,6 @@ metadata:
     app.kubernetes.io/name: seat-listener
     app.kubernetes.io/part-of: seats
     app.openshift.io/runtime: camel
-    app.openshift.io/runtime-version: "8"
     fuse-prometheus: "true"
   name: seat-listener
 spec:
@@ -42,23 +41,33 @@ spec:
         imagePullPolicy: Always
         name: seat-listener
         env:
-          - name: MYSQL_USER
-            valueFrom:
-              secretKeyRef:
-                name: seatsdb
-                key: database-user
-          - name: MYSQL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: seatsdb
-                key: database-password
-          - name: MYSQL_DATABASE
-            valueFrom:
-              secretKeyRef:
-                name: seatsdb
-                key: database-name
-          - name: MYSQL_SERVICE
-            value: seatsdb
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: seatsdb
+              key: database-user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: seatsdb
+              key: database-password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: seatsdb
+              key: database-name
+        - name: MYSQL_SERVICE
+          value: seatsdb
+        - name: SPRING_APPLICATION_JSON
+          value: '{"server":{"undertow":{"io-threads":1, "worker-threads":2 }}}'
+        - name: JAEGER_SERVICE_NAME
+          value: seat-listener
+        - name: JAEGER_SAMPLER_TYPE
+          value: const
+        - name: JAEGER_SAMPLER_PARAM
+          value: "1"
+        - name: JAEGER_ENDPOINT
+          value: http://jaeger-collector.seating-monitoring:14268/api/traces
         ports:
         - containerPort: 8080
           protocol: TCP
