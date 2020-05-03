@@ -429,7 +429,7 @@ spec:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(org_apache_camel_LastProcessingTime[5m])) by (service)",
+              "expr": "sum(rate(org_apache_camel_LastProcessingTime{service!=\"\"}[5m])) by (service)",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "",
@@ -740,7 +740,7 @@ spec:
         "list": []
       },
       "time": {
-        "from": "now-6h",
+        "from": "now-5m",
         "to": "now"
       },
       "timepicker": {
