@@ -76,7 +76,7 @@ spec:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(jvm_memory_bytes_used{service!=\"\"}) by (pod)",
+              "expr": "sum(jvm_memory_bytes_used{service!=\"\"}) by (service)",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "",
