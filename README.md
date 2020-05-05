@@ -40,14 +40,10 @@ you can deploy everything in parallel.
 
 ```oc apply -k cluster/overlays/ocplab/app/registration```
 
-5. Optionally install the analytics application (note this is currently tested, may not work):
-
-```oc apply -k cluster/overlays/ocplab/app/analytics```
-
-6. Optionally install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be view in one window.
+5. Optionally install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be view in one window.
 
 ```oc apply -k app/dashboard/overlays/default```
 
-7. Optionally deploy 3scale gateways. Note I use a sealed secret in my ocplab cluster, you will need to replace this your own secret in order for the gateways to connect to the 3scale admin portal. See the 3scale docs.
+6. Optionally deploy 3scale gateways. Note I use a sealed secret in my ocplab cluster, you will need to replace this your own secret in order for the gateways to connect to the 3scale admin portal. See the 3scale docs.
 
 ```kustomize build cluster/overlays/ocplab/app/apicast | oc apply -f -```
