@@ -40,6 +40,14 @@ spec:
         env:
         - name: CSV_FILES_PATH
           value: /home/jboss
+        - name: JAEGER_SERVICE_NAME
+          value: registration-loader
+        - name: JAEGER_SAMPLER_TYPE
+          value: const
+        - name: JAEGER_SAMPLER_PARAM
+          value: "1"
+        - name: JAEGER_ENDPOINT
+          value: http://jaeger-collector.seating-monitoring:14268/api/traces
         ports:
         - containerPort: 8080
           protocol: TCP
