@@ -47,3 +47,7 @@ you can deploy everything in parallel.
 6. Optionally deploy 3scale gateways. Note I use a sealed secret in my ocplab cluster, you will need to replace this your own secret in order for the gateways to connect to the 3scale admin portal. See the 3scale docs.
 
 ```kustomize build cluster/overlays/ocplab/app/apicast | oc apply -f -```
+
+7. Add user1 to projects
+
+```oc apply -k cluster/overlays/ocplab/security```
