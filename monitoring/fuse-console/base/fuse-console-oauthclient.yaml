@@ -1,0 +1,7 @@
+apiVersion: oauth.openshift.io/v1
+grantMethod: auto
+kind: OAuthClient
+metadata:
+  name: fuse76-console-oauth-client
+redirectURIs:
+- https://fuse76-console.apps.cluster.ocplab.com

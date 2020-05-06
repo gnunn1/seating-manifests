@@ -1,0 +1,5 @@
+namespace: seating-monitoring
+
+resources:
+- openshift-monitoring-rb.yaml
+- prometheus-rolebinding.yaml

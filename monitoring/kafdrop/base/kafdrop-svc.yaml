@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: kafdrop
+    app.kubernetes.io/name: kafdrop
+  name: kafdrop
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: http
+    nodePort: 30900
+    port: 9000
+    protocol: TCP
+    targetPort: http
+  selector:
+    app.kubernetes.io/instance: kafdrop
+    app.kubernetes.io/name: kafdrop
+  sessionAffinity: None
+  type: NodePort

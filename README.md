@@ -4,14 +4,29 @@ Based on a demo from Christina Lin (https://github.com/weimeilin79/sko2018)
 
 ## Install demo in your OpenShift cluster
 
-This demo uses kustomize to manage cluster specific settings. Kustomize is a patching framework that is included with kubectl/oc so there
-is no need to download a different tool.
+This demo uses kustomize to manage cluster specific settings. Kustomize is a patching framework that is included with kubectl/oc so there is no need to download a different tool.
 
 To modify the settings for your cluster, clone one of the clusters in the ```cluster/overlays``` folder and then update the patch
 files as needed for your environment. The most significant thing that needs updating are the route references the UI components
 have to their back-end services.
 
-## Install Demo
+## Pre-requisites
+
+1. Install the Red Hat Jaeger operator
+
+2. This demo uses kustomize to install the components, you will need to create an overlay for settings that are specific to your cluster.
+
+* Copy ```cluster/overlays/ocplab``` into a new folder for your cluster, i.e. ```cluster/overlays/mycluster```
+
+* Update the routes to match the routes in your cluster
+
+* For 3scale you need to provide a secret for apicast to connect to the 3scale admin portal. I use Bitname's SealedSecret however you can create a secret manually or add it to the apicast overlay. To create the secret manually use the following replaceing ```<access-token>``` and ```<admin_portal_domain>``` for your specific 3scale instance.
+
+```oc create secret generic apicast-configuration-url-secret --from-literal=password=https://<access_token>@<admin_portal_domain>  --type=kubernetes.io/basic-auth```
+
+3. Login as a user with cluster-admin rights since this will install operators as needed.
+
+## Install Demo Application
 
 1. Install AMQ Streams Operator first
 
@@ -31,14 +46,14 @@ Wait for all of the zookeeper and brokeroc delete instances to be ready
 
 3. Install the seats application:
 
-```oc apply -k cluster/overlays/ocplab/app/seats```
+```oc apply -k cluster/overlays/<your cluster>/app/seats```
 
 In a smallish cluster wait for all the builds to be completed and deployed before moving onto the next app. In a larger cluster
 you can deploy everything in parallel.
 
 4. Install the registration application:
 
-```oc apply -k cluster/overlays/ocplab/app/registration```
+```oc apply -k cluster/overlays/<your cluster>/app/registration```
 
 5. Optionally install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be view in one window.
 
@@ -46,8 +61,40 @@ you can deploy everything in parallel.
 
 6. Optionally deploy 3scale gateways. Note I use a sealed secret in my ocplab cluster, you will need to replace this your own secret in order for the gateways to connect to the 3scale admin portal. See the 3scale docs.
 
-```kustomize build cluster/overlays/ocplab/app/apicast | oc apply -f -```
+```kustomize build cluster/overlays/<your cluster>/app/apicast | oc apply -f -```
 
-7. Add user1 to projects
+## Install Monitoring
 
-```oc apply -k cluster/overlays/ocplab/security```
+1. Install the monitoring package
+
+```oc apply -k cluster/overlays/<your cluster>/monitoring```
+
+2. Install AMQ Streams specific security requirements for their dashboards:
+
+```oc apply -k monitoring/security/base```
+
+## Access rights
+
+1. Add non-admin user to projects (user1 in ocplab example)
+
+```oc apply -k cluster/overlays/<your cluster>/security```
+
+## 3scale Developer Portal
+
+1. A swagger file is available in the scripts/swagger directory that can be used to configure a seats as an API Product with two backends.
+
+## Running the demo
+
+1. Open the Dashboard in the seating project, this will give you three UI elements: a map of seats available, a form that can be filled out to register a seat and a feed of seat registrations
+
+2. Fill out the form to register a seat, the icon for the seat should change to black if it was successful.
+
+3. Open Jaeger monitoring in the ```seating-monitoring``` project and look at the registration-ui service to see a trace of the services that were traversed to process the rgistration
+
+4. Now show a traditional integration using CSV files. Change directory to ```scripts/loader``` and look at the reservations.csv file which contains three rows. Run the upload.sh script which will copy the file to the reservation-loader pod for processing. You should see three seats be reserved.
+
+5. Check Jaeger and look at the trace for registration-loader to see how the file was processed
+
+6. Log into the fuse-console in ```seat-monitoring``` and connect to the registration-loader. Notice how it receives one message, the file, and then splits it into three message to process each row individually.
+
+7. Scale up the seat-simulator to 1, this service will randomly reserve seats to generate traffic. While it is running use the grafana dashboards to monitor Kafka and Fuse.

@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: fuse76-console
+    component: fuse76-console
+    group: console
+    version: "1.6"
+  name: fuse76-console-route
+spec:
+  host: fuse76-console.apps.cluster.ocplab.com
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: reencrypt
+  to:
+    kind: Service
+    name: fuse76-console-service
+    weight: 100
+  wildcardPolicy: None
