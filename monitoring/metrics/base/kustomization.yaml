@@ -1,15 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-generatorOptions:
-  disableNameSuffixHash: true
-
-secretGenerator:
-  - name: generic additional-scrape-configs
-    files:
-      - secrets/prometheus-additional.yaml
-
 resources:
+- additional-scrape-configs-secret.yaml
 - prometheus.yaml
 - prometheus-route.yaml
 - prometheus-fuse-sm.yaml

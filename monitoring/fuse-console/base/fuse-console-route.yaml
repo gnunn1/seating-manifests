@@ -6,9 +6,9 @@ metadata:
     component: fuse76-console
     group: console
     version: "1.6"
-  name: fuse76-console-route
+  name: fuse76-console
 spec:
-  host: fuse76-console.apps.cluster.ocplab.com
+  host: fuse76-console.apps.cluster.example.com
   tls:
     insecureEdgeTerminationPolicy: Redirect
     termination: reencrypt

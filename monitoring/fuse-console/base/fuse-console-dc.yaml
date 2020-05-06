@@ -1,20 +1,12 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  annotations:
-    openshift.io/generated-by: OpenShiftNewApp
-  creationTimestamp: "2020-04-27T22:03:07Z"
-  generation: 4
   labels:
     app: fuse76-console
     component: fuse76-console
     group: console
     version: "1.6"
   name: fuse76-console
-  namespace: seating-monitoring
-  resourceVersion: "3164674"
-  selfLink: /apis/apps.openshift.io/v1/namespaces/seating-monitoring/deploymentconfigs/fuse76-console
-  uid: 710be707-0cac-4aff-9c1d-f27f14ffc082
 spec:
   replicas: 1
   revisionHistoryLimit: 10
@@ -36,8 +28,6 @@ spec:
     type: Rolling
   template:
     metadata:
-      annotations:
-        openshift.io/generated-by: OpenShiftNewApp
       creationTimestamp: null
       labels:
         app: fuse76-console
@@ -56,7 +46,7 @@ spec:
           value: fuse76-console-oauth-client
         - name: OPENSHIFT_CLUSTER_VERSION
           value: "4"
-        image: image-registry.openshift-image-registry.svc:5000/openshift/fuse7-console@sha256:04d9eea074ce3985cd8da6d7613c2ec8f544b205ba1f43fa59f035e9ef373cf6
+        image: image-registry.openshift-image-registry.svc:5000/openshift/fuse7-console:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -132,29 +122,4 @@ spec:
         kind: ImageStreamTag
         name: fuse7-console:1.6
         namespace: openshift
-      lastTriggeredImage: image-registry.openshift-image-registry.svc:5000/openshift/fuse7-console@sha256:04d9eea074ce3985cd8da6d7613c2ec8f544b205ba1f43fa59f035e9ef373cf6
     type: ImageChange
-status:
-  availableReplicas: 1
-  conditions:
-  - lastTransitionTime: "2020-04-27T22:03:10Z"
-    lastUpdateTime: "2020-04-27T22:03:22Z"
-    message: replication controller "fuse76-console-1" successfully rolled out
-    reason: NewReplicationControllerAvailable
-    status: "True"
-    type: Progressing
-  - lastTransitionTime: "2020-05-05T21:34:21Z"
-    lastUpdateTime: "2020-05-05T21:34:21Z"
-    message: Deployment config has minimum availability.
-    status: "True"
-    type: Available
-  details:
-    causes:
-    - type: ConfigChange
-    message: config change
-  latestVersion: 1
-  observedGeneration: 4
-  readyReplicas: 1
-  replicas: 1
-  unavailableReplicas: 0
-  updatedReplicas: 1

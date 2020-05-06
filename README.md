@@ -26,6 +26,14 @@ have to their back-end services.
 
 3. Login as a user with cluster-admin rights since this will install operators as needed.
 
+4. Ensure the fuse7-java-openshift image is installed for Fuse 7.6, check the tags in use:
+
+```oc get is -n openshift | grep fuse-java-openshift```
+
+If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 imagestream:
+
+```oc apply -f https://raw.githubusercontent.com/jboss-fuse/application-templates/2.1.x.sb2.redhat-7-6-x/fis-image-streams.json -n openshift```
+
 ## Install Demo Application
 
 1. Install AMQ Streams Operator first
@@ -55,7 +63,7 @@ you can deploy everything in parallel.
 
 ```oc apply -k cluster/overlays/<your cluster>/app/registration```
 
-5. Optionally install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be view in one window.
+5. Install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be view in one window.
 
 ```oc apply -k app/dashboard/overlays/default```
 
