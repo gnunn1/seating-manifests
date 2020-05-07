@@ -16,87 +16,87 @@ have to their back-end services.
 
 2. This demo uses kustomize to install the components, you will need to create an overlay for settings that are specific to your cluster.
 
-* Copy ```cluster/overlays/ocplab``` into a new folder for your cluster, i.e. ```cluster/overlays/mycluster```
+    * Copy ```cluster/overlays/ocplab``` into a new folder for your cluster, i.e. ```cluster/overlays/mycluster```
 
-* Update the routes to match the routes in your cluster
+    * Update the routes to match the routes in your cluster
 
-* For 3scale you need to provide a secret for apicast to connect to the 3scale admin portal. I use Bitname's SealedSecret however you can create a secret manually or add it to the apicast overlay. To create the secret manually use the following replaceing ```<access-token>``` and ```<admin_portal_domain>``` for your specific 3scale instance.
+    * For 3scale you need to provide a secret for apicast to connect to the 3scale admin portal. I use Bitname's SealedSecret however you can create a secret manually or add it to the apicast overlay. To create the secret manually use the following replaceing ```<access-token>``` and ```<admin_portal_domain>``` for your specific 3scale instance.
 
-```oc create secret generic apicast-configuration-url-secret --from-literal=password=https://<access_token>@<admin_portal_domain>  --type=kubernetes.io/basic-auth```
+        ```oc create secret generic apicast-configuration-url-secret --from-literal=password=https://<access_token>@<admin_portal_domain>  --type=kubernetes.io/basic-auth```
 
 3. Login as a user with cluster-admin rights since this will install operators as needed.
 
 4. Ensure the fuse7-java-openshift image is installed for Fuse 7.6, check the tags in use:
 
-```oc get is -n openshift | grep fuse-java-openshift```
+    ```oc get is -n openshift | grep fuse-java-openshift```
 
 If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 imagestream:
 
-```oc apply -f https://raw.githubusercontent.com/jboss-fuse/application-templates/2.1.x.sb2.redhat-7-6-x/fis-image-streams.json -n openshift```
+    ```oc apply -f https://raw.githubusercontent.com/jboss-fuse/application-templates/2.1.x.sb2.redhat-7-6-x/is-image-streams.json -n openshift```
 
 ## Install Demo Application
 
 1. Install AMQ Streams Operator first
 
-```oc apply -k app/amq-streams-operator/overlays/default```
+    ```oc apply -k app/amq-streams-operator/overlays/default```
 
 This will create a ```seating``` project, wait for the operator to be ready.
 
 2. Install the kafka cluster, you can either install a full 3 replica cluster using:
 
-```oc apply -k app/kafka/overlays/default```
+    ```oc apply -k app/kafka/overlays/default```
 
-Or a minimal 1 replica instance using:
+    Or a minimal 1 replica instance using:
 
-```oc apply -k app/kafka/overlays/minimal```
+    ```oc apply -k app/kafka/overlays/minimal```
 
-Wait for all of the zookeeper and brokeroc delete instances to be ready
+    Wait for all of the zookeeper and brokeroc delete instances to be ready
 
 3. Install the seats application:
 
-```oc apply -k cluster/overlays/<your cluster>/app/seats```
+    ```oc apply -k cluster/overlays/<your cluster>/app/seats```
 
-In a smallish cluster wait for all the builds to be completed and deployed before moving onto the next app. In a larger cluster
-you can deploy everything in parallel.
+    In a smallish cluster wait for all the builds to be completed and deployed before moving onto the next app. In a larger cluster
+    you can deploy everything in parallel.
 
 4. Install the registration application:
 
-```oc apply -k cluster/overlays/<your cluster>/app/registration```
+    ```oc apply -k cluster/overlays/<your cluster>/app/registration```
 
 5. Install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be view in one window.
 
-```oc apply -k app/dashboard/overlays/default```
+    ```oc apply -k app/dashboard/overlays/default```
 
 6. Optionally deploy 3scale gateways. Note I use a sealed secret in my ocplab cluster, you will need to replace this your own secret in order for the gateways to connect to the 3scale admin portal. See the 3scale docs.
 
-```kustomize build cluster/overlays/<your cluster>/app/apicast | oc apply -f -```
+    ```kustomize build cluster/overlays/<your cluster>/app/apicast | oc apply -f -```
 
 ## Install Monitoring
 
 1. Install the monitoring operators, wait for the grafana and prometheus monitors to be ready
 
-```oc apply -k monitoring/operators/overlays/default```
+    ```oc apply -k monitoring/operators/overlays/default```
 
 2. Install AMQ Streams specific security requirements for their dashboards:
 
-```oc apply -k monitoring/security/base```
+    ```oc apply -k monitoring/security/base```
 
 3. Generate secret for fuse console:
 
-```
-cd scripts/generate-fuse-console-cert
-./generate.sh
-```
+    ```
+    cd scripts/generate-fuse-console-cert
+    ./generate.sh
+    ```
 
 4. Install the monitoring package
 
-```oc apply -k cluster/overlays/<your cluster>/monitoring```
+    ```oc apply -k cluster/overlays/<your cluster>/monitoring```
 
 ## Access rights
 
 1. Add non-admin user to projects (user1 in ocplab example)
 
-```oc apply -k cluster/overlays/<your cluster>/security```
+    ```oc apply -k cluster/overlays/<your cluster>/security```
 
 ## 3scale Developer Portal
 
