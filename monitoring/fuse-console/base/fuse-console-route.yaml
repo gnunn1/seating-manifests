@@ -14,6 +14,6 @@ spec:
     termination: reencrypt
   to:
     kind: Service
-    name: fuse76-console-service
+    name: fuse76-console
     weight: 100
   wildcardPolicy: None

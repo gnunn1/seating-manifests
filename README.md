@@ -81,7 +81,14 @@ you can deploy everything in parallel.
 
 ```oc apply -k monitoring/security/base```
 
-3. Install the monitoring package
+3. Generate secret for fuse console:
+
+```
+cd scripts/generate-fuse-console-cert
+./generate.sh
+```
+
+4. Install the monitoring package
 
 ```oc apply -k cluster/overlays/<your cluster>/monitoring```
 

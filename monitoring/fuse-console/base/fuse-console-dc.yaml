@@ -46,7 +46,7 @@ spec:
           value: fuse76-console-oauth-client
         - name: OPENSHIFT_CLUSTER_VERSION
           value: "4"
-        image: image-registry.openshift-image-registry.svc:5000/openshift/fuse7-console:latest
+        image: registry.access.redhat.com/fuse7/fuse-console:1.6
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
