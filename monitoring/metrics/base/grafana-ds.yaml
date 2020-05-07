@@ -4,14 +4,14 @@ metadata:
   name: prometheus
   namespace: seating-monitoring
 spec:
+  name: prometheus.yaml
   datasources:
-    - access: proxy
-      editable: true
+    - name: Prometheus
+      type: prometheus
+      access: proxy
       isDefault: true
       jsonData:
+        tlsSkipVerify: true
         timeInterval: 5s
-      name: Prometheus
-      type: prometheus
-      url: 'http://prometheus-operated:9090'
+      url: http://prometheus-operated:9090
       version: 1
-  name: prometheus
