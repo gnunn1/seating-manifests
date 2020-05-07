@@ -4,3 +4,6 @@ resources:
 - operator-group.yaml
 - prometheus-subscription.yaml
 - grafana-subscription.yaml
+- additional-scrape-configs-secret.yaml
+- prometheus.yaml
+- grafana.yaml

@@ -2,12 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- additional-scrape-configs-secret.yaml
-- prometheus.yaml
 - prometheus-route.yaml
 - prometheus-fuse-sm.yaml
 - prometheus-kafka-sm.yaml
-- grafana.yaml
 - grafana-ds.yaml
 - grafana-kafka-dashboard.yaml
 - grafana-kafka-exporter-dashboard.yaml

@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: seating-monitoring
 
 bases:
-- ../../../../monitoring/operators/overlays/default
 - ../../../../monitoring/fuse-console/overlays/default
 - ../../../../monitoring/jaeger/overlays/default
 - ../../../../monitoring/kafdrop/overlays/default

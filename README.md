@@ -73,13 +73,17 @@ you can deploy everything in parallel.
 
 ## Install Monitoring
 
-1. Install the monitoring package
+1. Install the monitoring operators, wait for the grafana and prometheus monitors to be ready
 
-```oc apply -k cluster/overlays/<your cluster>/monitoring```
+```oc apply -k monitoring/operators/overlays/default```
 
 2. Install AMQ Streams specific security requirements for their dashboards:
 
 ```oc apply -k monitoring/security/base```
+
+3. Install the monitoring package
+
+```oc apply -k cluster/overlays/<your cluster>/monitoring```
 
 ## Access rights
 
