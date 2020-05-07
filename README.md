@@ -106,9 +106,13 @@ This will create a ```seating``` project, wait for the operator to be ready.
 
 1. Open the Dashboard in the seating project, this will give you three UI elements: a map of seats available, a form that can be filled out to register a seat and a feed of seat registrations
 
+![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/dashboard.png)
+
 2. Fill out the form to register a seat, the icon for the seat should change to black if it was successful.
 
 3. Open Jaeger monitoring in the ```seating-monitoring``` project and look at the registration-ui service to see a trace of the services that were traversed to process the rgistration
+
+![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/jaeger.png)
 
 4. Now show a traditional integration using CSV files. Change directory to ```scripts/loader``` and look at the reservations.csv file which contains three rows. Run the upload.sh script which will copy the file to the reservation-loader pod for processing. You should see three seats be reserved.
 
@@ -117,3 +121,5 @@ This will create a ```seating``` project, wait for the operator to be ready.
 6. Log into the fuse-console in ```seat-monitoring``` and connect to the registration-loader. Notice how it receives one message, the file, and then splits it into three message to process each row individually.
 
 7. Scale up the seat-simulator to 1, this service will randomly reserve seats to generate traffic. While it is running use the grafana dashboards to monitor Kafka and Fuse.
+
+![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/fuse-dashboard.png)
