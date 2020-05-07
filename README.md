@@ -20,7 +20,7 @@ have to their back-end services.
 
     * Update the routes to match the routes in your cluster
 
-    * For 3scale you need to provide a secret for apicast to connect to the 3scale admin portal. I use Bitname's SealedSecret however you can create a secret manually or add it to the apicast overlay. To create the secret manually use the following replaceing ```<access-token>``` and ```<admin_portal_domain>``` for your specific 3scale instance.
+    * For 3scale you need to provide a secret for apicast to connect to the 3scale admin portal. I use Bitnami's SealedSecret however you can create a secret manually or add it to the apicast overlay. To create the secret manually use the following replaceing ```<access-token>``` and ```<admin_portal_domain>``` for your specific 3scale instance.
 
         ```oc create secret generic apicast-configuration-url-secret --from-literal=password=https://<access_token>@<admin_portal_domain>  --type=kubernetes.io/basic-auth```
 
