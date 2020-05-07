@@ -32,7 +32,7 @@ have to their back-end services.
 
 If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 imagestream:
 
-    ```oc apply -f https://raw.githubusercontent.com/jboss-fuse/application-templates/2.1.x.sb2.redhat-7-6-x/is-image-streams.json -n openshift```
+      oc apply -f https://raw.githubusercontent.com/jboss-fuse/application-templates/2.1.x.sb2.redhat-7-6-x/is-image-streams.json -n openshift
 
 ## Install Demo Application
 
@@ -50,7 +50,7 @@ This will create a ```seating``` project, wait for the operator to be ready.
 
     ```oc apply -k app/kafka/overlays/minimal```
 
-    Wait for all of the zookeeper and brokeroc delete instances to be ready
+    Wait for all of the zookeeper and broker instances to be ready
 
 3. Install the seats application:
 
