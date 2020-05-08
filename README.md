@@ -1,12 +1,14 @@
+![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/seating.png)
+
 ## Credits
 
-Based on a demo from Christina Lin (https://github.com/weimeilin79/sko2018)
+Christina Lin (https://github.com/weimeilin79/sko2018) wrote the original version of this great demo.
 
 ## Demo
 
 This demo uses Fuse and Kafka to manage seating reservations and allocations. The flow of the services is shown in the diagram below going from left to right.
 
-![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/Fuse-Streams-3Scale-Demo.png)
+![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/Fuse-Streams-3Scale-Demo-Small.png)
 
 The intent of the demo is to highlight the Agile Integration architecture as used in an event driven architecture.
 
