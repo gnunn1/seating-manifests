@@ -2,7 +2,9 @@
 
 ## Credits
 
-Christina Lin (https://github.com/weimeilin79/sko2018) wrote the original version of this great demo.
+Christina Lin (https://github.com/weimeilin79/sko2018) wrote the original version of this great demo so all credit to her. 
+
+I've updated the code to Fuse 7.6 plus done some clean-up and the updated code can be found at (https://github.com/gnunn1/seating).
 
 ## Demo
 
@@ -10,15 +12,13 @@ This demo uses Fuse and Kafka to manage seating reservations and allocations. Th
 
 ![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/Fuse-Streams-3Scale-Demo-Small.png)
 
-The intent of the demo is to highlight the Agile Integration architecture as used in an event driven architecture.
+The intent of the demo is to highlight Agile Integration as used in a loosely coupled event driven architecture.
 
 ## Install demo in your OpenShift cluster
 
 This demo uses kustomize to manage cluster specific settings. Kustomize is a patching framework that is included with kubectl/oc so there is no need to download a different tool.
 
-To modify the settings for your cluster, clone one of the clusters in the ```cluster/overlays``` folder and then update the patch
-files as needed for your environment. The most significant thing that needs updating are the route references the UI components
-have to their back-end services.
+To modify the settings for your cluster, clone one of the clusters in the ```cluster/overlays``` folder and then update the patch files as needed for your environment. The most significant thing that needs updating are the route references the UI components have to their back-end services.
 
 ## Pre-requisites
 
@@ -32,7 +32,7 @@ have to their back-end services.
 
     * Update the routes to match the routes in your cluster
 
-    * For 3scale you need to provide a secret for apicast to connect to the 3scale admin portal. I use Bitnami's SealedSecret however you can create a secret manually or add it to the apicast overlay. To create the secret manually use the following replacing ```<access-token>``` and ```<admin_portal_domain>``` for your specific 3scale instance.
+    * For 3scale you need to provide a secret for apicast to connect to the 3scale admin portal. I use Bitnami's Sealed Secrets to enable me to check into git securely however you can create a secret manually or replace it with a standard secret in your overlay (NOTE: Do not check this secret into github directly!). To create the secret manually use the following and replace ```<access-token>``` and ```<admin_portal_domain>``` for your specific 3scale instance.
 
         ```oc create secret generic apicast-configuration-url-secret --from-literal=password=https://<access_token>@<admin_portal_domain>  --type=kubernetes.io/basic-auth```
 
@@ -52,7 +52,7 @@ If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 ima
 
     ```oc apply -k app/amq-streams-operator/overlays/default```
 
-This will create a ```seating``` project, wait for the operator to be ready.
+   This will create a ```seating``` project, wait for the operator to be ready.
 
 2. Install the kafka cluster, you can either install a full 3 replica cluster using:
 
@@ -75,11 +75,11 @@ This will create a ```seating``` project, wait for the operator to be ready.
 
     ```oc apply -k cluster/overlays/<your cluster>/app/registration```
 
-5. Install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be view in one window.
+5. Install the Dashboard. All of the individual UIs are available, the dashboard deploys a simple iFrame application so that everything can be viewed in one window.
 
     ```oc apply -k app/dashboard/overlays/default```
 
-6. Optionally deploy 3scale gateways. Note I use a sealed secret in my ocplab cluster, you will need to replace this your own secret in order for the gateways to connect to the 3scale admin portal. See the 3scale docs.
+6. Optionally deploy 3scale gateways. Note I use a sealed secret in my ocplab cluster which you will see in the overlay, you will need to replace this your own secret in order for the gateways to connect to the 3scale admin portal. See the 3scale docs.
 
     ```kustomize build cluster/overlays/<your cluster>/app/apicast | oc apply -f -```
 
