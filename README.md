@@ -2,6 +2,14 @@
 
 Based on a demo from Christina Lin (https://github.com/weimeilin79/sko2018)
 
+## Demo
+
+This demo uses Fuse and Kafka to manage seating reservations and allocations. The flow of the services is shown in the diagram below going from left to right.
+
+![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/Fuse-Streams-3Scale-Demo.png)
+
+The intent of the demo is to highlight the Agile Integration architecture as used in an event driven architecture.
+
 ## Install demo in your OpenShift cluster
 
 This demo uses kustomize to manage cluster specific settings. Kustomize is a patching framework that is included with kubectl/oc so there is no need to download a different tool.
@@ -14,25 +22,27 @@ have to their back-end services.
 
 1. Install the Red Hat Jaeger operator
 
-2. This demo uses kustomize to install the components, you will need to create an overlay for settings that are specific to your cluster.
+2. Have a 3scale admin portal installed or available. If you are a Red Hat employee you can request access to the 3scale hosted environment which is what I use for the majority of my demos.
+
+3. This demo uses kustomize to install the components, you will need to create an overlay for settings that are specific to your cluster.
 
     * Copy ```cluster/overlays/ocplab``` into a new folder for your cluster, i.e. ```cluster/overlays/mycluster```
 
     * Update the routes to match the routes in your cluster
 
-    * For 3scale you need to provide a secret for apicast to connect to the 3scale admin portal. I use Bitname's SealedSecret however you can create a secret manually or add it to the apicast overlay. To create the secret manually use the following replaceing ```<access-token>``` and ```<admin_portal_domain>``` for your specific 3scale instance.
+    * For 3scale you need to provide a secret for apicast to connect to the 3scale admin portal. I use Bitnami's SealedSecret however you can create a secret manually or add it to the apicast overlay. To create the secret manually use the following replacing ```<access-token>``` and ```<admin_portal_domain>``` for your specific 3scale instance.
 
         ```oc create secret generic apicast-configuration-url-secret --from-literal=password=https://<access_token>@<admin_portal_domain>  --type=kubernetes.io/basic-auth```
 
-3. Login as a user with cluster-admin rights since this will install operators as needed.
+4. Login as a user with cluster-admin rights since this will install operators as needed.
 
-4. Ensure the fuse7-java-openshift image is installed for Fuse 7.6, check the tags in use:
+5. Ensure the fuse7-java-openshift image is installed for Fuse 7.6, check the tags in use:
 
     ```oc get is -n openshift | grep fuse-java-openshift```
 
 If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 imagestream:
 
-    ```oc apply -f https://raw.githubusercontent.com/jboss-fuse/application-templates/2.1.x.sb2.redhat-7-6-x/is-image-streams.json -n openshift```
+      oc apply -f https://raw.githubusercontent.com/jboss-fuse/application-templates/2.1.x.sb2.redhat-7-6-x/is-image-streams.json -n openshift
 
 ## Install Demo Application
 
@@ -50,7 +60,7 @@ This will create a ```seating``` project, wait for the operator to be ready.
 
     ```oc apply -k app/kafka/overlays/minimal```
 
-    Wait for all of the zookeeper and brokeroc delete instances to be ready
+    Wait for all of the zookeeper and broker instances to be ready
 
 3. Install the seats application:
 
