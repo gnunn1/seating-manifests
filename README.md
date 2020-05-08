@@ -135,3 +135,15 @@ If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 ima
 7. Scale up the seat-simulator to 1, this service will randomly reserve seats to generate traffic. While it is running use the grafana dashboards to monitor Kafka and Fuse.
 
 ![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/fuse-dashboard.png)
+
+8. Visit the 3scale analytics dashboard to see the traffic being sent to the two http services (integration and status)
+
+## TODO
+
+I would like to make some improvements to this demo, PRs gratefully accepted:
+
+1. Enhance the messages with additional information, specifically include customer information in the seat allocation message and persist it to the database. Enhance the UI to show the info as a toolip when hovering or clicking on a seat.
+
+2. Add the schema registry to the demo
+
+3. Handle customers reserving the same seat with a manual intervention queue
