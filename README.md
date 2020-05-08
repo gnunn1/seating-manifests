@@ -2,7 +2,7 @@
 
 ## Credits
 
-Christina Lin (https://github.com/weimeilin79/sko2018) wrote the original version of this great demo so all credit to her. 
+Christina Lin (https://github.com/weimeilin79/sko2018) wrote the original version of this great demo so all credit to her.
 
 I've updated the code to Fuse 7.6 plus done some clean-up and the updated code can be found at (https://github.com/gnunn1/seating).
 
@@ -83,6 +83,10 @@ If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 ima
 
     ```kustomize build cluster/overlays/<your cluster>/app/apicast | oc apply -f -```
 
+    I've opted to configure the endpoints in 3scale using the API as a Product feature as per the diagram below, however you can configure it however you like just make sure to update the ```ROUTE_HOSTNAME``` environment variables to match your configuration.
+
+    ![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/3scale-config.png)
+
 ## Install Monitoring
 
 1. Install the monitoring operators, wait for the grafana and prometheus monitors to be ready
@@ -137,6 +141,8 @@ If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 ima
 ![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/fuse-dashboard.png)
 
 8. Visit the 3scale analytics dashboard to see the traffic being sent to the two http services (integration and status)
+
+![alt text](https://raw.githubusercontent.com/gnunn1/seating-manifests/master/docs/3scale-traffic.png)
 
 ## TODO
 
