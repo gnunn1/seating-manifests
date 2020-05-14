@@ -44,7 +44,7 @@ To modify the settings for your cluster, clone one of the clusters in the ```clu
 
 If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 imagestream:
 
-      oc apply -f https://raw.githubusercontent.com/jboss-fuse/application-templates/2.1.x.sb2.redhat-7-6-x/is-image-streams.json -n openshift
+      oc apply -f https://raw.githubusercontent.com/jboss-fuse/application-templates/2.1.x.sb2.redhat-7-6-x/fis-image-streams.json -n openshift
 
 ## Install Demo Application
 
