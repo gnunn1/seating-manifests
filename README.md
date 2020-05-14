@@ -40,7 +40,7 @@ To modify the settings for your cluster, clone one of the clusters in the ```clu
 
 5. Ensure the fuse7-java-openshift image is installed for Fuse 7.6, check the tags in use:
 
-    ```oc get is -n openshift | grep fuse-java-openshift```
+    ```oc get is -n openshift | grep fuse7-java-openshift```
 
 If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 imagestream:
 
