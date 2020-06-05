@@ -43,7 +43,7 @@ spec:
         - name: HAWTIO_ONLINE_GATEWAY
           value: "true"
         - name: HAWTIO_OAUTH_CLIENT_ID
-          value: fuse76-console-oauth-client
+          value: fuse76-console
         - name: OPENSHIFT_CLUSTER_VERSION
           value: "4"
         image: registry.access.redhat.com/fuse7/fuse-console:1.6

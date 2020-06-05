@@ -1,0 +1,14 @@
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: "fuse76-console"
+  labels:
+    component: "fuse76-console"
+    group: console
+    app: "fuse76-console"
+    version: "7.6"
+  annotations:
+    serviceaccounts.openshift.io/oauth-redirecturi.route: https://
+    serviceaccounts.openshift.io/oauth-redirectreference.route: '{"kind": "OAuthRedirectReference",
+      "apiVersion": "v1", "reference": {"kind": "Route", "name": "fuse76-console"}}'
