@@ -1,0 +1,3 @@
+- op: replace
+  path: /spec/host
+  value: fuse76-console.apps.cluster-vic-e6e4.vic-e6e4.example.opentlc.com

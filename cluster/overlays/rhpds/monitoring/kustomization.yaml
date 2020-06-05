@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: seating-monitoring
+
+bases:
+- ../../../../monitoring/fuse-console/overlays/default
+- ../../../../monitoring/jaeger/overlays/default
+- ../../../../monitoring/kafdrop/overlays/default
+- ../../../../monitoring/metrics/overlays/default
+
+patchesJson6902:
+- target:
+    version: v1
+    group: route.openshift.io
+    kind: Route
+    name: fuse76-console
+  path: patch-fuse-console-route.yaml
+- target:
+    version: v1
+    group: oauth.openshift.io
+    kind: OAuthClient
+    name: fuse76-console
+  path: patch-fuse-console-oauth.yaml
