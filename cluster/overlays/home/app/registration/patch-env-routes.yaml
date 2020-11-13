@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registration-live-ui
+spec:
+  template:
+    spec:
+      containers:
+        - name: registration-live-ui
+          env:
+          - name: ROUTE_HOSTNAME
+            # Native URL is /sa/status, added /registration for 3scale API as product public path mapping
+            value: http://apicast-prod-seating.apps.home.ocplab.com/registration/sa/status
+          - name: API_KEY
+            value: a486f905b59a96e6c4c59d34365290c8

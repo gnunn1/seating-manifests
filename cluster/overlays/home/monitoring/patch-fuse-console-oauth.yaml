@@ -1,0 +1,4 @@
+- op: replace
+  path: /redirectURIs/0
+  value:
+    https://fuse76-console.apps.home.ocplab.com

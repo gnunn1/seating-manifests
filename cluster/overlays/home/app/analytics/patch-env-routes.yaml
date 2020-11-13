@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytic-ui
+spec:
+  template:
+    spec:
+      containers:
+        - name: analytic-ui
+          env:
+          - name: ROUTE_HOSTNAME
+            value: analytic-listener-seating.apps.home.ocplab.com
