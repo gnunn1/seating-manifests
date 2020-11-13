@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/instance: dashboard
     app.kubernetes.io/name: dashboard
     app.openshift.io/runtime: nginx
-    app.openshift.io/runtime-version: "1.14"
+    app.openshift.io/runtime-version: "1.16"
   name: dashboard
 spec:
   failedBuildsHistoryLimit: 5
