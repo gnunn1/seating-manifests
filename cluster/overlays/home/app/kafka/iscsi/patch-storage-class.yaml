@@ -1,0 +1,12 @@
+- op: add
+  path: /spec/kafka/storage/class
+  value: iscsi
+- op: replace
+  path: /spec/kafka/storage/size
+  value: 10Gi
+- op: add
+  path: /spec/zookeeper/storage/class
+  value: iscsi
+- op: replace
+  path: /spec/zookeeper/storage/size
+  value: 10Gi
