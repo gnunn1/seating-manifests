@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: operator
 spec:
   kafka:
-    version: 2.4.0
+    version: 2.6.0
     template:
       statefulset:
         metadata:
@@ -15,8 +15,14 @@ spec:
             app.kubernetes.io/component: kafka
     replicas: 3
     listeners:
-      plain: {}
-      tls: {}
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
     readinessProbe:
       initialDelaySeconds: 15
       timeoutSeconds: 5
