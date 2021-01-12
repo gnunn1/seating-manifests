@@ -35,3 +35,4 @@ resources:
   - seat-ui-svc.yaml
   - seat-ui-route.yaml
   - seat-ui-deploy.yaml
+  - servicemonitor-fuse.yaml

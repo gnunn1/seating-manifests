@@ -1,0 +1,6 @@
+- op: replace
+  path: /subjects/0/namespace
+  value: seating-monitoring
+- op: replace
+  path: /metadata/name
+  value: cluster-monitoring-view-seating-monitoring

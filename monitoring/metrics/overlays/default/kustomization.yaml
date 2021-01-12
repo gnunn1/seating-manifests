@@ -6,5 +6,5 @@ namespace: seating-monitoring
 bases:
 - ../../base
 
-patchesStrategicMerge:
-- sm-patch.yaml
+# patchesStrategicMerge:
+# - sm-patch.yaml

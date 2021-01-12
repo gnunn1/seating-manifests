@@ -22,11 +22,13 @@ To modify the settings for your cluster, clone one of the clusters in the ```clu
 
 ## Pre-requisites
 
-1. Install the Red Hat Jaeger operator
+1. Enable OpenShift [User Application Monitoring](https://docs.openshift.com/container-platform/4.6/monitoring/enabling-monitoring-for-user-defined-projects.html)
 
-2. Have a 3scale admin portal installed or available. If you are a Red Hat employee you can request access to the 3scale hosted environment which is what I use for the majority of my demos.
+2. Install the Red Hat Jaeger operator
 
-3. This demo uses kustomize to install the components, you will need to create an overlay for settings that are specific to your cluster.
+3. Have a 3scale admin portal installed or available. If you are a Red Hat employee you can request access to the 3scale hosted environment which is what I use for the majority of my demos.
+
+4. This demo uses kustomize to install the components, you will need to create an overlay for settings that are specific to your cluster.
 
     * Copy ```cluster/overlays/ocplab``` into a new folder for your cluster, i.e. ```cluster/overlays/mycluster```
 
@@ -36,9 +38,9 @@ To modify the settings for your cluster, clone one of the clusters in the ```clu
 
         ```oc create secret generic apicast-configuration-url-secret --from-literal=password=https://<access_token>@<admin_portal_domain>  --type=kubernetes.io/basic-auth```
 
-4. Login as a user with cluster-admin rights since this will install operators as needed.
+5. Login as a user with cluster-admin rights since this will install operators as needed.
 
-5. Ensure the fuse7-java-openshift image is installed for Fuse 7.6, check the tags in use:
+6. Ensure the fuse7-java-openshift image is installed for Fuse 7.6, check the tags in use:
 
     ```oc get is -n openshift | grep fuse7-java-openshift```
 
@@ -93,9 +95,9 @@ If there is no 1.6 tag (i.e. only 1.5 or earlier shows), import the Fuse 7.6 ima
 
     ```oc apply -k monitoring/operators/overlays/default```
 
-2. Install AMQ Streams specific security requirements for their dashboards:
+<!-- 2. Install AMQ Streams specific security requirements for their dashboards:
 
-    ```oc apply -k monitoring/security/base```
+    ```oc apply -k monitoring/security/base``` -->
 
 3. Generate secret for fuse console:
 
