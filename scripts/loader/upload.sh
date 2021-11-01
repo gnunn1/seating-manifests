@@ -1,4 +1,4 @@
-POD_NAME=$(oc get pods -oname -l deploymentconfig=registration-loader | sed 's/pod\///')
+POD_NAME=$(oc get pods -oname -l deploymentconfig=registration-loader -n seating | sed 's/pod\///')
 
 echo "Copying reservations.csv to ${POD_NAME}:/home/jboss/reservations.csv"
 
