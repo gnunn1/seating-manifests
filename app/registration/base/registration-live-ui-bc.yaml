@@ -11,11 +11,10 @@ metadata:
     app.kubernetes.io/name: registration-live-ui
     app.kubernetes.io/part-of: register
     app.openshift.io/runtime: nodejs
-    app.openshift.io/runtime-version: "10"
+    app.openshift.io/runtime-version: "12"
   name: registration-live-ui
 spec:
   failedBuildsHistoryLimit: 5
-  nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
@@ -33,7 +32,7 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: nodejs:10
+        name: nodejs:12
         namespace: openshift
     type: Source
   successfulBuildsHistoryLimit: 5
