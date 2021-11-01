@@ -7,13 +7,19 @@ commonAnnotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 
 bases:
-- github.com/redhat-canada-gitops/catalog//grafana-operator/overlays/user-app
+- github.com/redhat-cop/gitops-catalog/grafana-operator/overlays/user-app
 
 resources:
 - namespace.yaml
 - operator-group.yaml
 
 patchesJson6902:
+- target:
+    version: v1alpha1
+    group: operators.coreos.com
+    kind: Subscription
+    name: grafana
+  path: patch-grafana-channel.yaml
 - target:
     version: v1
     group: rbac.authorization.k8s.io
