@@ -1,4 +1,4 @@
-apiVersion: kafka.strimzi.io/v1beta1
+apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
   name: seating
@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: operator
 spec:
   kafka:
-    version: 2.6.0
+    # version: 2.6.0
     template:
       statefulset:
         metadata:
