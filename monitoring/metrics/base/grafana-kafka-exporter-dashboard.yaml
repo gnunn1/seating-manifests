@@ -5,16 +5,28 @@ metadata:
     app: grafana
   name: kafka-exporter-dashboard
 spec:
+  datasources:
+    - inputName: "DS_PROMETHEUS"
+      datasourceName: "Prometheus"
   json: |
     {
       "_comment": "Based on https://grafana.com/grafana/dashboards/7589",
-
+      "__inputs": [
+        {
+          "name": "DS_PROMETHEUS",
+          "label": "Prometheus",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "prometheus",
+          "pluginName": "Prometheus"
+        }
+      ],
       "__requires": [
         {
           "type": "grafana",
           "id": "grafana",
           "name": "Grafana",
-          "version": "5.2.0"
+          "version": "7.3.7"
         },
         {
           "type": "panel",
@@ -524,7 +536,7 @@ spec:
           "thresholds": "1,2",
           "timeFrom": null,
           "timeShift": null,
-          "title": "Partitions at mininimum ISR",
+          "title": "Partitions at minimum ISR",
           "type": "singlestat",
           "valueFontSize": "200%",
           "valueMaps": [
@@ -606,7 +618,7 @@ spec:
           "thresholds": "1,2",
           "timeFrom": null,
           "timeShift": null,
-          "title": "Partitions under mininimum ISR",
+          "title": "Partitions under minimum ISR",
           "type": "singlestat",
           "valueFontSize": "200%",
           "valueMaps": [
@@ -704,7 +716,7 @@ spec:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 0,
           "gridPos": {
             "h": 10,
@@ -795,7 +807,7 @@ spec:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 0,
           "gridPos": {
             "h": 10,
@@ -886,7 +898,7 @@ spec:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 0,
           "gridPos": {
             "h": 10,
@@ -1352,7 +1364,7 @@ spec:
           {
             "allValue": null,
             "current": {},
-            "datasource": "Prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "definition": "",
             "hide": 0,
             "includeAll": false,
@@ -1360,7 +1372,7 @@ spec:
             "multi": false,
             "name": "kubernetes_namespace",
             "options": [],
-            "query": "query_result(kafka_consumergroup_current_offset)",
+            "query": "query_result(kafka_exporter_build_info)",
             "refresh": 1,
             "regex": "/.*namespace=\"([^\"]*).*/",
             "skipUrlSync": false,
@@ -1374,7 +1386,7 @@ spec:
           {
             "allValue": null,
             "current": {},
-            "datasource": "Prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "definition": "",
             "hide": 0,
             "includeAll": false,
@@ -1382,7 +1394,7 @@ spec:
             "multi": false,
             "name": "strimzi_cluster_name",
             "options": [],
-            "query": "query_result(kafka_consumergroup_current_offset{namespace=\"$kubernetes_namespace\"})",
+            "query": "query_result(kafka_exporter_build_info{namespace=\"$kubernetes_namespace\"})",
             "refresh": 1,
             "regex": "/.*strimzi_io_cluster=\"([^\"]*).*/",
             "skipUrlSync": false,
@@ -1401,7 +1413,7 @@ spec:
                 "$__all"
               ]
             },
-            "datasource": "Prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "definition": "label_values(kafka_consumergroup_current_offset{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\"}, consumergroup)",
             "hide": 0,
             "includeAll": true,
@@ -1428,7 +1440,7 @@ spec:
                 "$__all"
               ]
             },
-            "datasource": "Prometheus",
+            "datasource": "${DS_PROMETHEUS}",
             "definition": "label_values(kafka_topic_partition_current_offset{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\"}, topic)",
             "hide": 0,
             "includeAll": true,
@@ -1483,4 +1495,3 @@ spec:
       "uid": "jwPKIsniz",
       "version": 1
     }
-  name: kafka-exporter-dashboard.json
